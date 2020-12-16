@@ -23,12 +23,14 @@ r_title = soup.select_one('#contents_area > div.view2_summary.st3 > h3')
 print(r_title.get_text())
 
 for i in range(1,15):
-    r_content = soup.select_one('#stepDiv{}'.format(i)).get_text()
-    print(r_content)
+    r_content = soup.select_one('#stepDiv{}'.format(i))
+    print(r_content.get_text())
 
 for j in range(1,4):
     r_info = soup.select_one('#contents_area > div.view2_summary.st3 > div.view2_summary_info > span.view2_summary_info{}'.format(j))
     print(r_info.get_text())
 
+t = ((r_title, r_content, r_info))
 
-
+dao.insert(t)
+dao.select()
