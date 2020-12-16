@@ -9,8 +9,8 @@ def insert(t):
         print(connection.version)
         try:
             cursor = connection.cursor()
-            query = """INSERT INTO DESSERT
-             values(seq_des_code.nextval,:1,:2, '댓글','img/src','재료',:3,'링크1','링크2','링크3')"""
+            query = "INSERT INTO DESSERT " \
+                    "values(seq_des_code.nextval,:1,:2, '댓글','img/src','재료',:3,'링크1','링크2','링크3')"
             cursor.execute(query,t)
 
         except Exception as err:
@@ -29,7 +29,7 @@ def select():
 
     cursor = connection.cursor()
 
-    query = """select * from KINDS"""
+    query = """select * from dessert"""
     cursor.execute(query)
     row = cursor.fetchall()
     print(row)

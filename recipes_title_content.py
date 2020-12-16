@@ -2,34 +2,39 @@ from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 import dessertDAO as dao
 
-
-req = urlopen('https://www.10000recipe.com/recipe/6846168')
-
+req = urlopen('https://www.10000recipe.com/recipe/6906441')
 
 print(req.getcode())
 
 if req.getcode() == 200:
     html = req.read()
-    #print(html)
+    # print(html)
 
     html = html.decode("utf-8")
-    #print(html)
+    # print(html)
 else:
     print("HTTP ERROR")
 
 soup = BeautifulSoup(html, "html.parser")
+rc = ''
+info = ''
+rt = ''
 
 r_title = soup.select_one('#contents_area > div.view2_summary.st3 > h3').get_text()
-print(r_title)
 
-for i in range(1,15):
-    r_content = soup.select_one('#stepDiv{}'.format(i)).get_text()
-    print(r_content)
 
-for j in range(1,4):
-    r_info = soup.select_one('#contents_area > div.view2_summary.st3 > div.view2_summary_info > span.view2_summary_info{}'.format(j)).get_text()
-    print(r_info)
+for i in range(1, 10):
+    r_content = soup.select('.view_step > #stepDiv{}'.format(i))
 
-t = ((r_title, r_content, r_info))
+    for r_contents in r_content:
+        print(i, r_contents.get_text())
+        rc = rc + r_contents.get_text()
+
+r_info = soup.select('#contents_area > div.view2_summary.st3 > div.view2_summary_info > span')
+for r_infos in r_info:
+    print(r_infos.get_text())
+    info = info + r_infos.get_text()
+
+t = (r_title, rc, info)
 dao.insert(t)
 dao.select()
