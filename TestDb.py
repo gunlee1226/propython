@@ -12,3 +12,4 @@ row = cursor.fetchall()
 for output in row:
     print(output)
 connection.close()
+
