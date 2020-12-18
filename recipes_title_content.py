@@ -27,14 +27,17 @@ for i in range(1, 10):
     r_content = soup.select('.view_step > #stepDiv{}'.format(i))
 
     for r_contents in r_content:
-        print(i, r_contents.get_text())
+      #  print(i, r_contents.get_text())
         rc = rc + r_contents.get_text()
 
 r_info = soup.select('#contents_area > div.view2_summary.st3 > div.view2_summary_info > span')
 for r_infos in r_info:
-    print(r_infos.get_text())
+   # print(r_infos.get_text())
     info = info + r_infos.get_text()
 
-t = (r_title, rc, info)
-dao.insert(t)
-dao.select()
+r_img = soup.select_one('#main_thumbs')
+src = r_img.attrs['src']
+print(src)
+#t = (r_title, rc, info)
+#dao.insert(t)
+#dao.select()
