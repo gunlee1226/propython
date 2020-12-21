@@ -10,7 +10,7 @@ def insert(t):
         try:
             cursor = connection.cursor()
             query = "INSERT INTO DESSERT " \
-                    "values(seq_des_code.nextval,:1,:2, '댓글', :3,:4,:5,'링크1','링크2','링크3')"
+                    "values(seq_des_code.nextval,:1,:2, '댓글', :3,:4,:5,'링크1','링크2','링크3',:6)"
             cursor.execute(query,t)
 
         except Exception as err:

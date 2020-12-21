@@ -5,7 +5,7 @@ connection = cx_Oracle.connect("desr/desr@localhost:1521/xe")
 
 cursor = connection.cursor()
 
-query = """select * from dessert"""
+query = """select * from dessert order by des_code asc"""
 cursor.execute(query)
 row = cursor.fetchall()
 

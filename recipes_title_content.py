@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import dessertDAO as dao
 
 
-req = urlopen('https://www.10000recipe.com/recipe/6860385')
+req = urlopen('https://www.10000recipe.com/recipe/6935891')
 
 print(req.getcode())
 
@@ -27,7 +27,7 @@ r_met = ''
 r_title = soup.select_one('#contents_area > div.view2_summary.st3 > h3').get_text()
 
 #조리방법
-for i in range(1, 6):
+for i in range(1, 16):
     r_content = soup.select('.view_step > #stepDiv{}'.format(i))
 
     for r_contents in r_content:
@@ -50,8 +50,10 @@ for r_metes in r_mete:
     r_met = r_met + r_metes.get_text()
 #공백제거
 r_mett = ' '.join(r_met.split())
-print(r_mett)
 
-t = (r_title, r_con, src,r_mett,info)
+
+t = (r_title, r_con, src,r_mett,info , 6)
 dao.insert(t)
+
+#1.떡 2.튀김 3.아이스크림 4.과일 5.야채 6.제과 7.제빵
 
