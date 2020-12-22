@@ -2,7 +2,7 @@ from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 import re
 
-req = urlopen('https://www.10000recipe.com/recipe/list.html?q=&query=&cat1=&cat2=&cat3=&cat4=66&fct=&order=reco&lastcate=cat4&dsearch=&copyshot=&scrap=&degree=&portion=&time=&niresource=')
+req = urlopen('https://www.10000recipe.com/recipe/6904344')
 
 print(req.getcode())
 
@@ -16,10 +16,12 @@ else:
     print("HTTP ERROR")
 
 soup = BeautifulSoup(html, "html.parser")
-for i in range (1,20):
-    rhead = soup.select('#contents_area_full > ul > ul > li:nth-child({}) > div.common_sp_caption > div.common_sp_caption_tit.line2'.format(i))
-    for rheads in rhead:
-        print(rheads.get_text())
 
-
+recipe_step = []
+res = soup.select_one('div.view_step')
+i = 0
+for n in res.select('div.view_step_cont'):
+    i = i + 1
+    recipe_step.append('#' + str(i) + ' ' + n.get_text().replace('\n',' '))
+print(recipe_step)
 #print(body ,body1 ,body2 , sep='\n')

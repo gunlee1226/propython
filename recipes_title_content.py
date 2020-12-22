@@ -27,11 +27,14 @@ r_met = ''
 r_title = soup.select_one('#contents_area > div.view2_summary.st3 > h3').get_text()
 
 #조리방법
-for i in range(1, 16):
-    r_content = soup.select('.view_step > #stepDiv{}'.format(i))
+res = soup.select_one('div.view_step')
+i = 0
+for r_cont in res.select('div.view_step_cont'):
+    r_con = r_con + r_cont.get_text()
 
-    for r_contents in r_content:
-        r_con = r_con + r_contents.get_text()
+print(r_con)
+
+
 #간단정보
 r_info = soup.select('#contents_area > div.view2_summary.st3 > div.view2_summary_info > span')
 for r_infos in r_info:
@@ -52,8 +55,8 @@ for r_metes in r_mete:
 r_mett = ' '.join(r_met.split())
 
 
-t = (r_title, r_con, src,r_mett,info , 6)
+t = (r_title, r_con, src,r_mett,info , 8)
 dao.insert(t)
 
-#1.떡 2.튀김 3.아이스크림 4.과일 5.야채 6.제과 7.제빵
+#1.떡 2.튀김 3.아이스크림 4.과일 5.야채 6.제과 7.제빵 8.기타
 
